@@ -1,4 +1,5 @@
-import { mapService } from './services/map-service.js'
+import { mapService } from './services/map-service.js';
+import { locationService } from './services/location-service.js';
 
 var gMap;
 console.log('Main!');
@@ -67,7 +68,7 @@ function getPosition() {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyA17BYjyDxu05k6Xn8hWDDbMEdoghMsdGU'; //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
