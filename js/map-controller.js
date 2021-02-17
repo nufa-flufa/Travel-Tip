@@ -53,8 +53,6 @@ window.onload = () => {
             console.log('err!!!', err);
         })
     renderUserTableInfo();
-
-
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
