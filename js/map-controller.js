@@ -30,11 +30,11 @@ window.onload = () => {
     initMap()
         .then(() => {
             var locations = locationService.getLocations()
-            locations.map(location =>{
-                var pos = {lat:location.lat, lng: location.lng}
+            locations.map(location => {
+                var pos = { lat: location.lat, lng: location.lng }
                 addMarker(pos, location.name)
             })
-           
+
         })
         .catch(() => console.log('INIT MAP ERROR'));
 
@@ -46,7 +46,7 @@ window.onload = () => {
             console.log('err!!!', err);
         })
     renderUserTableInfo();
-    // setMarkersToMap();
+
 
 
 }
@@ -73,9 +73,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
                 renderUserTableInfo();
                 var locations = locationService.getLocations()
-                locations.map(location =>{
-                    var pos = {lat:location.lat, lng: location.lng}
-                    addMarker(pos,location.name)
+                locations.map(location => {
+                    var pos = { lat: location.lat, lng: location.lng }
+                    addMarker(pos, location.name)
                 })
                 // setMarkersToMap();
                 //mapsMouseEvent.latLng.toJSON() // this will give you the lat lng
@@ -85,7 +85,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 }
 
 function addMarker(loc, text) {
-
+    console.log('entered addMark')
+    console.log('pos:', loc)
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
@@ -106,7 +107,7 @@ function currPosition() {
                 lat: pos.coords.latitude,
                 lng: pos.coords.longitude
             }
-            panTo(latLng.lat,latLng.lng)
+            panTo(latLng.lat, latLng.lng)
             console.log('User position is:', latLng);
             return latLng;
         })
@@ -119,12 +120,12 @@ function currPosition() {
 function goToAdress() {
     const address = document.querySelector('.search-address').value;
     if (address) {
-       mapService.getLatLngByAdress(address)
-       .then(pos =>{
-           console.log(pos.address); // address name
-           console.log(pos.location); // address loc
-           panTo(pos.location.lat,pos.location.lng);
-       })
+        mapService.getLatLngByAdress(address)
+            .then(pos => {
+                console.log(pos.address); // address name
+                console.log(pos.location); // address loc
+                panTo(pos.location.lat, pos.location.lng);
+            })
     }
 
 }
@@ -159,12 +160,12 @@ function deleteCurrLocation(id) {
     locations.splice(locationIdx, 1);
     console.log('delete')
     utilService.saveToStorage('TRAVTIP', locations)
-    // initMap()
+
     renderUserTableInfo();
     // console.log('locations after delete:', locations)
     console.log('rendering table')
     locations.map(location => {
-        var pos = {lat: location.lat, lng: location.lng};
+        var pos = { lat: location.lat, lng: location.lng };
         console.log('removing marks')
         addMarker(pos, location.name)
     })
@@ -173,7 +174,6 @@ function deleteCurrLocation(id) {
 function renderUserTableInfo() {
     const locations = locationService.getLocations()
     document.querySelector('.locations-table tbody').innerHTML = locations.map(location => {
-
         return `<tr>
         <td>${location.name}</td>
         <td>${location.lat}</td>
