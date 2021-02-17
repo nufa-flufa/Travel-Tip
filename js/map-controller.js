@@ -4,9 +4,9 @@ import {
 import {
     locationService
 } from './services/location-service.js';
-import{
+import {
     utilService
-}from './services/util-service.js';
+} from './services/util-service.js';
 
 var gMap;
 mapService.getLocs() // take the loc array from the map service
@@ -19,6 +19,7 @@ window.panTo = panTo;
 
 
 
+
 window.onload = () => {
 
     document.querySelector('.btn').addEventListener('click', (ev) => {
@@ -28,10 +29,12 @@ window.onload = () => {
 
     initMap()
         .then(() => {
-            addMarker({
-                lat: 32.0749831,
-                lng: 34.9120554
-            });
+            var locations = locationService.getLocations()
+            locations.map(location =>{
+                var pos = {lat:location.lat, lng: location.lng}
+                addMarker(pos, location.name)
+            })
+           
         })
         .catch(() => console.log('INIT MAP ERROR'));
 
@@ -42,7 +45,10 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
-    renderUserTableInfo()
+    renderUserTableInfo();
+    setMarkersToMap();
+
+
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -52,26 +58,34 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: {
-                        lat,
-                        lng
-                    },
-                    zoom: 15
+                center: {
+                    lat,
+                    lng
+                },
+                zoom: 15
+            })
+            gMap.addListener("click", (mapsMouseEvent) => {
+                var pos = (mapsMouseEvent.latLng.toJSON());
+                // link to new location 
+                console.log('pos:', pos)
+                var placeName = prompt('name the place')
+                locationService.addLocation(placeName, pos.lat, pos.lng)
+
+                renderUserTableInfo();
+                var locations = locationService.getLocations()
+                locations.map(location =>{
+                    var pos = {lat:location.lat, lng: location.lng}
+                    addMarker(pos,)
                 })
-                gMap.addListener("click", (mapsMouseEvent) => {
-                    var pos = (mapsMouseEvent.latLng.toJSON());
-                    // link to new location 
-                    console.log('pos:', pos)
-                    var placeName = prompt('name the place')
-                    locationService.addLocation(placeName, pos.lat, pos.lng)
-                    renderUserTableInfo();
-                    //mapsMouseEvent.latLng.toJSON() // this will give you the lat lng
-                });
+                // setMarkersToMap();
+                //mapsMouseEvent.latLng.toJSON() // this will give you the lat lng
+            });
             console.log('Map!', gMap);
         })
 }
 
 function addMarker(loc, text) {
+
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
@@ -137,16 +151,18 @@ function deleteCurrLocation(id) {
     var locations = locationService.getLocations();
     var locationIdx = locations.findIndex(location => location.id === id)
     locations.splice(locationIdx, 1);
-    utilService.saveToStorage('TRAVTIP',locations)
-    renderUserTableInfo()
-
+    utilService.saveToStorage('TRAVTIP', locations)
+    renderUserTableInfo();
+    locations.forEach(location => {
+        var pos = {lat: location.lat, lng: location.lng};
+        addMarker(pos, location.name)
+    })
 }
 
 function renderUserTableInfo() {
-    console.log('render')
     const locations = locationService.getLocations()
-    console.log('locations to render:',locations)
     document.querySelector('.locations-table tbody').innerHTML = locations.map(location => {
+
         return `<tr>
         <td>${location.name}</td>
         <td>${location.lat}</td>
@@ -156,4 +172,12 @@ function renderUserTableInfo() {
         <td><button onclick="deleteCurrLocation('${location.id}')">Delete</button></td>
         </tr>`
     }).join('');
+}
+
+function setMarkersToMap() {
+    const locations = locationService.getLocations()
+    locations.map(location => {
+        var pos = { lat: location.lat, lng: location.lng };
+        addMarker(pos, location.text)
+    })
 }

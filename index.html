@@ -14,12 +14,12 @@
             <div class="logo">
                 <h1>TravelTip</h1>
             </div>
-            <div class="nav-bar flex">
+            <div class="nav-bar flex align-items justify-center">
                 <form onsubmit="return false">
                     <input type="text" class="search-address">
                     <button onclick="goToAdress()">Go</button>
                 </form>
-                <button onclick="currPosition()">My Locations</button>
+                <button class="btn my-locations" onclick="currPosition()">My Locations</button>
             </div>
         </div>
     </header>
@@ -38,17 +38,12 @@
                         <td>Lat</td>
                         <td>Lan</td>
                         <td>Weather</td>
-                        <td colspan="2">Actions <button></button></td>
+                        <td colspan="2">Actions</td>
                     </thead>
                     <tbody>
                         <tr>
                         <td>hello</td>
-                            <!-- <td>${location.name}</td>
-                            <td>${location.lat}</td>
-                            <td>${location.lng}</td>
-                            <td>${location.weather}</td>
-                            <td><button onclick="panTo('${location.lat},${location.lng}')">Go</button></td>
-                            <td><button onclick="deleteCurrLocation('${location.id}')"></button>Delete</td> -->
+                          
                         </tr>
                     </tbody>
                 </table>

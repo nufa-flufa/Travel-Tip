@@ -29,26 +29,16 @@ header{
     border: 3px solid black;
 }
 
-table >*{
-    /* outline: teal 2px solid; */
-}
-
-
 .main-container{
   flex-direction: column;
   margin: auto;
 }
-.main-content{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-}
 
 .map-content{
-    grid-area:1/2/2/3 ;
+   float: right;
 }
 .user-content{
-    grid-area: 1/1/2/2;
+   float: left;
     
 }
 
@@ -60,27 +50,55 @@ table >*{
     width: 1200px;
     justify-content: space-between;
     padding: 0 10px;
-   
 }
 
+.nav-bar >*{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 60%;
+    margin: auto;
+}
+
+.my-locations{
+    height:60% ;
+    width: 90px;
+    border-radius: 4px;
+    margin-left: 20px;
+}
+.map-content{
+    width: 45%;
+
+}
+.user-content{
+    width: 50%;
+}
 .location{
     height: 100px;
     border: 2px solid black;
 }
 
 .weather{
-    height: 100px;
+    height: 50%;
     border: springgreen solid 2px;
 }
-.locations-table{
-    height: 200px;
-    /* border: steelblue 2px solid; */
+.locations-table tr:nth-child(odd){
+background-color: rgba(50, 137, 192, 0.548);
 }
 .locations-table thead td{
+    background-color: lightslategrey;
     width: 100px;
     height: 50px;
     border: black solid 2px;
     text-align: center;
+    padding: 5px;
+}
+
+.locations-table tbody td{
+    border: black solid 1px;
+    padding: 5px;
+    /* background-color: lightcoral; */
+    
 }
 
 
@@ -101,4 +119,12 @@ table >*{
 }
 .flex.align-center {
     align-items: center;
+}
+.btn{
+    background-color: lightblue;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 5px;
+    border: none;
 }
