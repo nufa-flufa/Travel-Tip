@@ -4,6 +4,9 @@ import {
 import {
     locationService
 } from './services/location-service.js';
+import{
+    utilService
+}from './services/util-service.js';
 
 var gMap;
 mapService.getLocs() // take the loc array from the map service
@@ -11,6 +14,8 @@ mapService.getLocs() // take the loc array from the map service
 
 window.goToAdress = goToAdress;
 window.currPosition = currPosition;
+window.deleteCurrLocation = deleteCurrLocation;
+window.panTo = panTo;
 
 
 
@@ -54,8 +59,12 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     zoom: 15
                 })
                 gMap.addListener("click", (mapsMouseEvent) => {
-                    console.log(mapsMouseEvent.latLng.toJSON());
+                    var pos = (mapsMouseEvent.latLng.toJSON());
                     // link to new location 
+                    console.log('pos:', pos)
+                    var placeName = prompt('name the place')
+                    locationService.addLocation(placeName, pos.lat, pos.lng)
+                    renderUserTableInfo();
                     //mapsMouseEvent.latLng.toJSON() // this will give you the lat lng
                 });
             console.log('Map!', gMap);
@@ -83,6 +92,7 @@ function currPosition() {
                 lat: pos.coords.latitude,
                 lng: pos.coords.longitude
             }
+            panTo(latLng.lat,latLng.lng)
             console.log('User position is:', latLng);
             return latLng;
         })
@@ -95,7 +105,12 @@ function currPosition() {
 function goToAdress() {
     const address = document.querySelector('.search-address').value;
     if (address) {
-        mapService.getLatLngByAdress(address);
+       mapService.getLatLngByAdress(address)
+       .then(pos =>{
+           console.log(pos.address); // address name
+           console.log(pos.location); // address loc
+           panTo(pos.location.lat,pos.location.lng);
+       })
     }
 
 }
@@ -121,4 +136,30 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+
+function deleteCurrLocation(id) {
+    var locations = locationService.getLocations();
+    var locationIdx = locations.findIndex(location => location.id === id)
+    locations.splice(locationIdx, 1);
+    utilService.saveToStorage('TRAVTIP',locations)
+    renderUserTableInfo()
+
+}
+
+function renderUserTableInfo() {
+    console.log('render')
+    const locations = locationService.getLocations()
+    console.log('locations to render:',locations)
+    document.querySelector('.locations-table tbody').innerHTML = locations.map(location => {
+        return `<tr>
+        <td>${location.name}</td>
+        <td>${location.lat}</td>
+        <td>${location.lng}</td>
+        <td>${location.weather}</td>
+        <td><button onclick="panTo(${location.lat},${location.lng})">Go</button></td>
+        <td><button onclick="deleteCurrLocation('${location.id}')">Delete</button></td>
+        </tr>`
+    }).join('');
 }
