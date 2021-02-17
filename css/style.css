@@ -1,0 +1,96 @@
+
+/* BASICS */
+
+*{
+    box-sizing: border-box;
+}
+
+
+html{
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    margin: 0;
+}
+body >*{
+    outline: cornflowerblue 2px solid;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 .833em;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+
+/* LAYOUT */
+
+header{
+    border: 3px solid black;
+}
+
+main{
+    /* border: crimson 3PX solid; */
+}
+
+
+.main-container{
+  flex-direction: column;
+  margin: auto;
+}
+.main-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.map-content{
+    grid-area:1/2/2/3 ;
+}
+.user-content{
+    grid-area: 1/1/2/2;
+    
+}
+
+/* COMPONENTS */
+.main-header{
+    background-color: teal;
+}
+.main-nav{
+    width: 1200px;
+    justify-content: space-between;
+    padding: 0 10px;
+   
+}
+
+.location{
+    height: 100px;
+    border: 2px solid black;
+}
+
+.weather{
+    height: 100px;
+    border: springgreen solid 2px;
+}
+.location-tables{
+    height: 200px;
+    border: steelblue 2px solid;
+}
+
+
+
+/* HELPERS */
+
+.max-width{
+    max-width: 1200px;
+}
+
+.flex{
+    display: flex;
+}
+.flex.justify-center{
+    justify-content: center;
+}
+.flex.align-center {
+    align-items: center;
+}

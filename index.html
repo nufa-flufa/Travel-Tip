@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ES6</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <h1>ES6</h1>
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <button class="btn">Click Me</button>
-    
+    <header class="main-header flex justify-center">
+        <div class="main-nav max-width flex">
+            <div class="logo">
+                <h1>TravelTip</h1>
+            </div>
+            <div class="nav-bar flex">
+                <form>
+                    <input type="text">
+                    <button>Go</button>
+                </form>
+                <button>My Locations</button>
+            </div>
+        </div>
+    </header>
+    <main class="main-container max-width flex align-items justify-center">
+        <div class="location max-width">Location</div>
+        <div class="main-content">
+            <div class="map-content">
+                <div id="map" style="width: 100%; height: 400px;"></div>
+                <button class="btn">Click Me</button>
+            </div>
+            <div class="user-content">
+                <div class="weather">Weathr</div>
+                <div class="locations-table">Table</div>
+            </div>
+        </div>
+
+    </main>
+
     <script type="module" src="js/map-controller.js"></script>
 </body>
+
 </html>
