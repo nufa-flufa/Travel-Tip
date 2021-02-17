@@ -52,6 +52,11 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     },
                     zoom: 15
                 })
+                gMap.addListener("click", (mapsMouseEvent) => {
+                    console.log(mapsMouseEvent.latLng.toJSON());
+                    // link to new location 
+                    //mapsMouseEvent.latLng.toJSON() // this will give you the lat lng
+                });
             console.log('Map!', gMap);
         })
 }

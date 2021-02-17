@@ -19,6 +19,7 @@ function getLatLngByAdress(address){ // take an address and return an obj with f
             return  res.data.results[0];
         })
         .then(info =>{
+            console.log(info.formatted_address,info.geometry.location);
             return ({address:info.formatted_address,location:info.geometry.location});
         })
 }
