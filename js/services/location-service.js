@@ -3,7 +3,7 @@ import { utilService } from './util-service.js';
 export const locationService = {
     addLocation,
     getLocations,
-    upDate
+    upDate,
 }
 
 const LOCALKEY = 'TRAVTIP';

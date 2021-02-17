@@ -27,23 +27,31 @@
         <div class="location max-width">Location</div>
         <div class="main-content">
             <div class="map-content">
-                <div id="map" style="width: 100%; height: 400px;" ></div>
+                <div id="map" style="width: 100%; height: 400px;"></div>
                 <button class="btn">Click Me</button>
             </div>
             <div class="user-content">
-                <div class="weather" onclick="renderUserTableInfo()"">Weathr</div>
-                    <table class="locations-table" >
-                        <thead>
-                                <td>Place</td>
-                                <td>Lat</td>
-                                <td>Lan</td>
-                                <td>Weather</td>
-                                <td colspan="2">Actions <button onclick="deleteCurrLocation(dhjkv)" ></button></td>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
+                <div class="weather">Weathr</div>
+                <table class="locations-table">
+                    <thead>
+                        <td>Place</td>
+                        <td>Lat</td>
+                        <td>Lan</td>
+                        <td>Weather</td>
+                        <td colspan="2">Actions <button></button></td>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>hello</td>
+                            <!-- <td>${location.name}</td>
+                            <td>${location.lat}</td>
+                            <td>${location.lng}</td>
+                            <td>${location.weather}</td>
+                            <td><button onclick="panTo('${location.lat},${location.lng}')">Go</button></td>
+                            <td><button onclick="deleteCurrLocation('${location.id}')"></button>Delete</td> -->
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
