@@ -143,6 +143,7 @@ function goToAdress() {
     if (address) {
         mapService.getLatLngByAdress(address)
             .then(pos => {
+                document.querySelector('.location').innerText = `Location: ${pos.address}`
                 console.log(pos.address); // address name
                 console.log(pos.location); // address loc
                 panTo(pos.location.lat, pos.location.lng);
@@ -196,15 +197,14 @@ function renderUserTableInfo() {
     const locations = locationService.getLocations()
     console.log('locations to render:', locations)
     document.querySelector('.locations-table tbody').innerHTML = locations.map(location => {
-
         return `<tr>
         <td>${location.name}</td>
         <td>${location.lat}</td>
         <td>${location.lng}</td>
         <td>${location.weather}℃</td>
-        <td><button onclick="panTo(${location.lat},${location.lng})">Go</button></td>
-        <td><button onclick="deleteCurrLocation('${location.id}')">Delete</button></td>
-        <td><button onclick="renderLink('${location.lat}','${location.lng}')">Share</button></td>
+        <td><button class="btn" onclick="panTo(${location.lat},${location.lng})">Go</button></td>
+        <td><button class="btn" onclick="deleteCurrLocation('${location.id}')">Delete</button></td>
+        <td><button  class="btn" onclick="renderLink('${location.lat}','${location.lng}')">Share</button></td>
         </tr>`
     }).join('');
 }
