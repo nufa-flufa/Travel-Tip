@@ -106,6 +106,7 @@ function currPosition() {
                 lat: pos.coords.latitude,
                 lng: pos.coords.longitude
             }
+            panTo(latLng.lat,latLng.lng)
             console.log('User position is:', latLng);
             return latLng;
         })
@@ -118,7 +119,12 @@ function currPosition() {
 function goToAdress() {
     const address = document.querySelector('.search-address').value;
     if (address) {
-        mapService.getLatLngByAdress(address);
+       mapService.getLatLngByAdress(address)
+       .then(pos =>{
+           console.log(pos.address); // address name
+           console.log(pos.location); // address loc
+           panTo(pos.location.lat,pos.location.lng);
+       })
     }
 
 }
@@ -134,7 +140,7 @@ function getPosition() {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyBwEu5ssH7PzYCkSLgoG3n9Nn5gtb0HU88'; //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyA17BYjyDxu05k6Xn8hWDDbMEdoghMsdGU'; //Enter your API Key
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
