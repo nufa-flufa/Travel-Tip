@@ -7,6 +7,7 @@
 
 html {
     font-family: Arial, Helvetica, sans-serif;
+    background-color:#EEFCFC ;
 }
 
 body {
@@ -89,11 +90,11 @@ form >*{
 }
 
 .my-location {
+    padding:2px;
     height: 60%;
     width: 90px;
     border-radius: 4px;
     margin-left: 20px;
-    
 }
 .main-content{
     flex-direction: column;
@@ -128,7 +129,8 @@ form >*{
 
 .locations-table{
     margin: auto;
-    width: 800px;
+    width: 750px;
+
 }
 .locations-table thead td {
     width: 160px;
@@ -136,6 +138,7 @@ form >*{
     background-color: #52B5B5;
     height: 50px;
     text-align: center;
+    font-weight: 600;
     padding: 20px;
 }
 
