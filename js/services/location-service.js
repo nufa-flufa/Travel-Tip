@@ -23,6 +23,7 @@ function addLocation(name, lat, lng) {
         name,
         lat,
         lng,
+        address: 'a',
         weather: null,
         createdAt: Date.now(),
         updateAt: null

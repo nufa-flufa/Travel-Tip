@@ -22,11 +22,6 @@ window.renderLink = renderLink;
 
 
 window.onload = () => {
-    document.querySelector('.btn').addEventListener('click', (ev) => {
-        //console.log('Aha!', ev.target);
-        panTo(35.6895, 139.6917);
-    })
-
     const urlParams = new URLSearchParams(window.location.search);
     const latParams = +urlParams.get('lat') || 32.0749831;
     const lngParam = +urlParams.get('lng') || 34.9120554;
@@ -72,14 +67,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 console.log('pos:', pos)
                 var placeName = prompt('name the place')
                 locationService.addLocation(placeName, pos.lat, pos.lng).then(renderUserTableInfo)
-                /*var locations = locationService.getLocations()
-                locations.map(location => {
-                    var pos = {
-                        lat: location.lat,
-                        lng: location.lng
-                    }
-                    gMarkers.push(addMarker(pos, location.name));
-                })*/
                 clearMarkers();
                 gMarkers.push(addMarker(pos, location.name));
                 renderMarkers();
@@ -116,7 +103,8 @@ function renderMarkers() {
     })
 }
 
-function panTo(lat, lng) {
+function panTo(lat, lng , name = '') {
+    document.querySelector('.location').innerText = name;
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
 }
@@ -143,10 +131,10 @@ function goToAdress() {
     if (address) {
         mapService.getLatLngByAdress(address)
             .then(pos => {
-                document.querySelector('.location').innerText = `Location: ${pos.address}`
+                panTo(pos.location.lat, pos.location.lng);
                 console.log(pos.address); // address name
                 console.log(pos.location); // address loc
-                panTo(pos.location.lat, pos.location.lng);
+                document.querySelector('.location').innerText = `Location: ${pos.address}`
             })
     }
 
@@ -202,20 +190,9 @@ function renderUserTableInfo() {
         <td>${location.lat}</td>
         <td>${location.lng}</td>
         <td>${location.weather}℃</td>
-        <td><button class="btn" onclick="panTo(${location.lat},${location.lng})">Go</button></td>
+        <td><button class="btn" onclick="panTo(${location.lat},${location.lng},'${location.name}')">Go</button></td>
         <td><button class="btn" onclick="deleteCurrLocation('${location.id}')">Delete</button></td>
         <td><button  class="btn" onclick="renderLink('${location.lat}','${location.lng}')">Share</button></td>
         </tr>`
     }).join('');
-}
-
-function setMarkersToMap() {
-    const locations = locationService.getLocations()
-    locations.map(location => {
-        var pos = {
-            lat: location.lat,
-            lng: location.lng
-        };
-        addMarker(pos, location.text)
-    })
 }
