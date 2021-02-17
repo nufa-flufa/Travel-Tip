@@ -16,6 +16,7 @@ const LOCALKEY = 'TRAVTIP';
 const locations = utilService.loadFromStorage(LOCALKEY) || [];
 
 function addLocation(name, lat, lng) {
+    if(!name) return;
     const id = utilService.getRandomId()
     const loc = {
         id,
