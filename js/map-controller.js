@@ -46,7 +46,7 @@ window.onload = () => {
             console.log('err!!!', err);
         })
     renderUserTableInfo();
-    setMarkersToMap();
+    // setMarkersToMap();
 
 
 }
@@ -75,7 +75,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 var locations = locationService.getLocations()
                 locations.map(location =>{
                     var pos = {lat:location.lat, lng: location.lng}
-                    addMarker(pos,)
+                    addMarker(pos,location.name)
                 })
                 // setMarkersToMap();
                 //mapsMouseEvent.latLng.toJSON() // this will give you the lat lng
@@ -157,10 +157,15 @@ function deleteCurrLocation(id) {
     var locations = locationService.getLocations();
     var locationIdx = locations.findIndex(location => location.id === id)
     locations.splice(locationIdx, 1);
+    console.log('delete')
     utilService.saveToStorage('TRAVTIP', locations)
+    // initMap()
     renderUserTableInfo();
-    locations.forEach(location => {
+    // console.log('locations after delete:', locations)
+    console.log('rendering table')
+    locations.map(location => {
         var pos = {lat: location.lat, lng: location.lng};
+        console.log('removing marks')
         addMarker(pos, location.name)
     })
 }
