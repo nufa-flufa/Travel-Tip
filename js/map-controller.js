@@ -62,13 +62,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
         })
 }
 
-<<<<<<< HEAD
-
-function addMarker(loc) {
-    console.log(loc)
-=======
 function addMarker(loc, text) {
->>>>>>> 2eb4e3b783b5f93bc30b42d7c04deb549cb608a6
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
@@ -117,11 +111,7 @@ function getPosition() {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-<<<<<<< HEAD
-    const API_KEY = 'AIzaSyBwEu5ssH7PzYCkSLgoG3n9Nn5gtb0HU88'; //TODO: Enter your API Key
-=======
     const API_KEY = 'AIzaSyA17BYjyDxu05k6Xn8hWDDbMEdoghMsdGU'; //Enter your API Key
->>>>>>> 2eb4e3b783b5f93bc30b42d7c04deb549cb608a6
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -131,28 +121,4 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
-<<<<<<< HEAD
 }
-
-
-function deleteCurrLocation(id) {
-    console.log(id)
-}
-
-function renderUserTableInfo() {
-    console.log('render')
-    const locations = locationService.getLocations()
-    document.querySelector('.locations-table tbody').innerHTML = locations.map(location => {
-        `<tr>
-        <td>${location.name}</td>
-        <td>${location.lat}</td>
-        <td>${location.lng}</td>
-        <td>${location.weather}</td>
-        <td><button onclick="panTo(${location.lat},${location.lng})">Go</button></td>
-        <td><button onclick="deleteCurrLocation(${location.id})"></button>Delete</td>
-        </tr>`
-    }).join('');
-}
-=======
-}
->>>>>>> 2eb4e3b783b5f93bc30b42d7c04deb549cb608a6
