@@ -15,11 +15,11 @@
                 <h1>TravelTip</h1>
             </div>
             <div class="nav-bar flex">
-                <form>
-                    <input type="text">
-                    <button>Go</button>
+                <form onsubmit="return false">
+                    <input type="text" class="search-address">
+                    <button onclick="goToAdress()">Go</button>
                 </form>
-                <button>My Locations</button>
+                <button onclick="currPosition()">My Locations</button>
             </div>
         </div>
     </header>
@@ -38,6 +38,7 @@
 
     </main>
 
+    <script src="lib/axios.js"></script>
     <script type="module" src="js/map-controller.js"></script>
 </body>
 
