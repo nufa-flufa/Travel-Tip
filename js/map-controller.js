@@ -8,7 +8,7 @@ mapService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
-    
+
     document.querySelector('.btn').addEventListener('click', (ev) => {
         console.log('Aha!', ev.target);
         panTo(35.6895, 139.6917);
@@ -27,6 +27,7 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
+    renderUserTableInfo()
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -43,7 +44,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
         })
 }
 
+
 function addMarker(loc) {
+    console.log(loc)
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
@@ -68,7 +71,7 @@ function getPosition() {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyA17BYjyDxu05k6Xn8hWDDbMEdoghMsdGU'; //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyBwEu5ssH7PzYCkSLgoG3n9Nn5gtb0HU88'; //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -81,4 +84,21 @@ function _connectGoogleApi() {
 }
 
 
+function deleteCurrLocation(id) {
+    console.log(id)
+}
 
+function renderUserTableInfo() {
+    console.log('render')
+    const locations = locationService.getLocations()
+    document.querySelector('.locations-table tbody').innerHTML = locations.map(location => {
+        `<tr>
+        <td>${location.name}</td>
+        <td>${location.lat}</td>
+        <td>${location.lng}</td>
+        <td>${location.weather}</td>
+        <td><button onclick="panTo(${location.lat},${location.lng})">Go</button></td>
+        <td><button onclick="deleteCurrLocation(${location.id})"></button>Delete</td>
+        </tr>`
+    }).join('');
+}

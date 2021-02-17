@@ -27,12 +27,23 @@
         <div class="location max-width">Location</div>
         <div class="main-content">
             <div class="map-content">
-                <div id="map" style="width: 100%; height: 400px;"></div>
+                <div id="map" style="width: 100%; height: 400px;" ></div>
                 <button class="btn">Click Me</button>
             </div>
             <div class="user-content">
-                <div class="weather">Weathr</div>
-                <div class="locations-table">Table</div>
+                <div class="weather" onclick="renderUserTableInfo()"">Weathr</div>
+                    <table class="locations-table" >
+                        <thead>
+                                <td>Place</td>
+                                <td>Lat</td>
+                                <td>Lan</td>
+                                <td>Weather</td>
+                                <td colspan="2">Actions <button onclick="deleteCurrLocation(dhjkv)" ></button></td>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
             </div>
         </div>
 

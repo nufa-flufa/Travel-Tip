@@ -2,7 +2,7 @@ import { utilService } from './util-service.js';
 
 export const locationService = {
     addLocation,
-    getLocation,
+    getLocations,
     upDate
 }
 
@@ -24,7 +24,7 @@ function addLocation(name,lat,lng){
     utilService.saveToStorage(LOCALKEY,locations);
 }
 
-function getLocation(){
+function getLocations(){
     return locations;
 }
 
