@@ -1,4 +1,5 @@
-import { utilService } from './util-service';
+import { utilService } from './util-service.js';
+
 export const locationService = {
     addLocation,
     getLocation,
